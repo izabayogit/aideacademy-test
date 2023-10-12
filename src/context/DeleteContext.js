@@ -19,6 +19,10 @@ export const DeleteProvider = ({ children }) => {
     </DeleteContext.Provider>
   );
 };
+const editContext = createContext(null);
+export const EditProvider = ({ children }) => {
+  const [openEditModal, setOpenEditModal] = useState(false)
+}
 
 export const useDeleteContext = () => {
   const context = useContext(DeleteContext);
