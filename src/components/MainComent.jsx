@@ -104,7 +104,7 @@ export const MainComment = ({ isMine, comment, handleReply, handleEdit, upVote, 
                                                                 <AiOutlineMinus />
                                                         </span>
                                                 </div>
-                                                {!isMine ? (
+                                                {comment.name !== myName ? (
                                                         <div className="flex text-[#1A5276] font-bold cursor-pointer text-xs " onClick={() => handleReply(comment.id)}>
                                                                 <BsFillReplyFill className="mt-1 mr-1" />
                                                                 <p> reply</p>
