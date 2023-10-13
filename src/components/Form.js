@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { createComment } from "@/utils/dataHelper";
 
-export const Form = () => {
+export const Form = ({ updateUi }) => {
         const [comment, setComment] = useState("");
 
         const handleInputChange = (event) => {
@@ -11,12 +11,14 @@ export const Form = () => {
 
         const handleSubmit = (event) => {
                 event.preventDefault();
-                createComment({
-                        name: "amyrobson",
-                        text: comment,
-                });
-                console.log(comment);
+                if (comment !== "") {
+                        createComment({
+                                name: "Jonas",
+                                comment: comment,
+                        });
+                }
                 setComment("");
+                updateUi();
         };
         return (
                 <div className="bg-white pb-5 rounded ">

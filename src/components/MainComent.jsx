@@ -6,19 +6,20 @@ import Image from "next/image";
 import IconDelete from "../../public/assets/icons/icon-delete.svg";
 import { useState } from "react";
 import { useDeleteContext } from "@/context/DeleteContext";
+import moment from 'moment';
 
-export const MainComment = ({ isMine, comment }) => {
+export const MainComment = ({ isMine, comment, handleReply, handleEdit, upVote, downVote, myName }) => {
         const { openConfirmationModal } = useDeleteContext();
         return (
                 <div>
                         <div className="bg-white flex   p-5 rounded mt-2">
                                 <div className=" hidden md:block lg:block bg-[#F4F6F6]  pt-2 pl-2 pr-2 rounded mr-5 h-24">
-                                        <span className="cursor-pointer ">
+                                        <span className="cursor-pointer " onClick={() => { upVote(comment.id, comment.votes) }}>
                                                 <AiOutlinePlus />
                                         </span>
 
-                                        <p className="pt-4 pb-4 text-[#1A5276] font-bold"> 12</p>
-                                        <span className="cursor-pointer">
+                                        <p className="pt-4 pb-4 text-[#1A5276] font-bold"> {comment.votes}</p>
+                                        <span className="cursor-pointer" onClick={() => { downVote(comment.id, comment.votes) }}>
                                                 <AiOutlineMinus />
                                         </span>
                                 </div>
@@ -37,20 +38,20 @@ export const MainComment = ({ isMine, comment }) => {
                                                                 <p className="mr-5 md:mr-2 font-bold text-[#566573]">
                                                                         {comment.name}{" "}
                                                                 </p>
-                                                                {isMine ? (
+                                                                {comment.name === myName ? (
                                                                         <p className="mr-5 md:mr-1 text-xs pr-[5px] pl-[5px] h-[20px] text-white bg-[#5D3FD3] rounded">
                                                                                 {" "}
                                                                                 you
                                                                         </p>
                                                                 ) : null}
                                                                 <p className="truncate text-[10px] md:text-xs md:mr-1 lg:text-base text-[#777] text-base">
-                                                                        1 min ago{" "}
+                                                                        {moment(comment.date).fromNow()}{" "}
                                                                 </p>
                                                         </div>
                                                 </div>
 
-                                                {!isMine ? (
-                                                        <div className=" hidden md:flex lg:flex text-[#1A5276] font-bold cursor-pointer ">
+                                                {comment.name !== myName ? (
+                                                        <div className=" hidden md:flex lg:flex text-[#1A5276] font-bold cursor-pointer " onClick={() => handleReply(comment.id)}>
                                                                 <BsFillReplyFill />
                                                                 <p> reply</p>
                                                         </div>
@@ -73,7 +74,7 @@ export const MainComment = ({ isMine, comment }) => {
                                                                                 Delete
                                                                         </p>
                                                                 </div>
-                                                                <div className="flex  ">
+                                                                <div className="flex  " onClick={() => { handleEdit(comment.id) }}>
                                                                         <Image
                                                                                 src="/assets/icons/icon-edit.svg"
                                                                                 width="10"
@@ -94,24 +95,24 @@ export const MainComment = ({ isMine, comment }) => {
                                         </div>
                                         <div className="flex mt-5 md:hidden lg:hidden xl:hidden 2xl:hidden justify-between">
                                                 <div className=" flex justify-between w-[35%]  bg-[#F4F6F6]  pt-2 pl-2 pr-2 pb-2  rounded text-xs  ">
-                                                        <span className="cursor-pointer ">
+                                                        <span className="cursor-pointer  " onClick={() => { upVote(comment.id, comment.votes) }}>
                                                                 <AiOutlinePlus />
                                                         </span>
 
-                                                        <p className="  text-[#1A5276] font-bold"> 12</p>
-                                                        <span className="cursor-pointer">
+                                                        <p className="  text-[#1A5276] font-bold"> {comment.votes}</p>
+                                                        <span className="cursor-pointer" onClick={() => { downVote(comment.id, comment.votes) }}>
                                                                 <AiOutlineMinus />
                                                         </span>
                                                 </div>
                                                 {!isMine ? (
-                                                        <div className="flex text-[#1A5276] font-bold cursor-pointer text-xs ">
+                                                        <div className="flex text-[#1A5276] font-bold cursor-pointer text-xs " onClick={() => handleReply(comment.id)}>
                                                                 <BsFillReplyFill className="mt-1 mr-1" />
                                                                 <p> reply</p>
                                                         </div>
                                                 ) : (
                                                         <div className=" flex  text-[#1A5276] font-bold cursor-pointer mt-2 text-xs ">
                                                                 <div className="flex mr-3" onClick={() => {
-                                                                        openConfirmationModal();
+                                                                        openConfirmationModal(comment.id);
                                                                 }}>
                                                                         <Image
                                                                                 src="/assets/icons/icon-delete.svg"
@@ -122,7 +123,7 @@ export const MainComment = ({ isMine, comment }) => {
                                                                         />
                                                                         <p className="text-[12px] ml-2"> Delete</p>
                                                                 </div>
-                                                                <div className="flex  ">
+                                                                <div className="flex  " onClick={() => { handleEdit(comment.id) }}>
                                                                         <Image
                                                                                 src="/assets/icons/icon-edit.svg"
                                                                                 width="10"

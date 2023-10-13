@@ -2,8 +2,8 @@ import { useDeleteContext } from "@/context/DeleteContext";
 import React, { useState } from "react";
 
 // Define the Modal component
-export const ConfirmationModal = () => {
-  const { openModal, closeModal } = useDeleteContext();
+export const ConfirmationModal = ({ updateUi }) => {
+  const { openModal, closeModal, handleDelete } = useDeleteContext();
 
   if (!openModal) {
     return null;
@@ -57,7 +57,7 @@ export const ConfirmationModal = () => {
               No,Cancel
             </button>
             <button
-              onClick={closeModal}
+              onClick={() => { handleDelete(); updateUi() }}
               type="button"
               className="bg-red-400 uppercase md:min-w-[150px] whitespace-nowrap  text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:bg-red-500 focus:z-10 "
             >

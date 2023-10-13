@@ -2,8 +2,17 @@ import { BsFillReplyFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai"
 import { AiOutlineMinus } from "react-icons/ai"
 import Image from "next/image";
+import { useState } from "react";
 
-export const EditForm = ({ isMine }) => {
+export const EditForm = ({ isMine, comment, updateComment, myName }) => {
+
+        const [newComment, setNewComment] = useState(comment.comment);
+
+
+        const handleChange = (event) => {
+                setNewComment(event.target.value);
+
+        };
         return (
                 <div>
                         <div className="bg-white flex  mt-2  p-5 rounded">
@@ -25,7 +34,7 @@ export const EditForm = ({ isMine }) => {
                                                         </div>
                                                         <div className="flex ml-5 md:ml-1  text-sm md:text-md lg:text-base ">
                                                                 <p className="mr-5 md:mr-2 font-bold text-[#566573]">amyrobson </p>
-                                                                {isMine ? (<p className="mr-5 md:mr-1 text-xs pr-[5px] pl-[5px] h-[20px] text-white bg-[#5D3FD3] rounded"> you</p>) : null}
+                                                                {myName === comment.name ? (<p className="mr-5 md:mr-1 text-xs pr-[5px] pl-[5px] h-[20px] text-white bg-[#5D3FD3] rounded"> you</p>) : null}
                                                                 <p className="truncate text-[10px] md:text-xs md:mr-1 lg:text-base text-[#777] text-base">1 min ago </p>
                                                         </div>
                                                 </div>
@@ -43,7 +52,7 @@ export const EditForm = ({ isMine }) => {
                                         </div>
                                         <div className="w-[100%]  mt-2">
                                                 <form className=" " >
-                                                        <textarea rows="3" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full " placeholder="Add a comment..." >
+                                                        <textarea rows="3" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full " placeholder="Add a comment..." value={newComment} onChange={handleChange} >
                                                         </textarea>
                                                 </form>
                                         </div>
@@ -70,7 +79,7 @@ export const EditForm = ({ isMine }) => {
                                                 </div>
                                         </div>
                                         <div className=" float-right md:block lg:block ">
-                                                <button type="submit" className="bg-[#5D3FD3] rounded pl-4 pr-4 pt-2 pb-2 uppercase text-white text-xs" >
+                                                <button type="submit" className="bg-[#5D3FD3] rounded pl-4 pr-4 pt-2 pb-2 uppercase text-white text-xs" onClick={() => { updateComment(comment.id, { comment: newComment }) }} >
                                                         update
                                                 </button>
                                         </div>
