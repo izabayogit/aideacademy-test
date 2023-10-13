@@ -15,12 +15,12 @@ export const ReplyForm = ({ comment, replyComment, commentData, myName }) => {
                                 </div>
                                 <div className="w-[100%] md:w-[65%] lg:w-[75%] xl:w-[75%] 2xl:w-[75%]">
                                         <form className=" " >
-                                                <textarea value={reply} rows="2" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full " placeholder={`@ ${comment.name}`} onChange={handleInputChange} >
+                                                <textarea value={reply} rows="2" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full pl-4" placeholder={`@ ${comment.name}`} onChange={handleInputChange} >
                                                 </textarea>
                                         </form>
                                 </div>
                                 <div className=" hidden md:block lg:block">
-                                        <button type="submit" className="bg-[#5D3FD3] rounded pl-4 pr-4 pt-2 pb-2 uppercase text-white text-xs" onClick={() => { replyComment({ reply, commentData, comment, name: myName, }) }}>
+                                        <button type="submit" className="bg-[#5D3FD3] rounded pl-4 pr-4 pt-2 pb-2 uppercase text-white text-xs" onClick={() => { replyComment({ reply, commentData, comment, name: myName, }) }} >
                                                 reply
                                         </button>
                                 </div>

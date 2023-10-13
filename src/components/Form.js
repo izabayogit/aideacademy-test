@@ -2,10 +2,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { createComment } from "@/utils/dataHelper";
 
-export const Form = ({ updateUi }) => {
+export const Form = ({ updateUi, myName }) => {
         const [comment, setComment] = useState("");
 
-        const handleInputChange = (event) => {
+        const handleInputChange = (event,) => {
                 setComment(event.target.value);
         };
 
@@ -13,7 +13,7 @@ export const Form = ({ updateUi }) => {
                 event.preventDefault();
                 if (comment !== "") {
                         createComment({
-                                name: "Jonas",
+                                name: myName,
                                 comment: comment,
                         });
                 }
@@ -39,7 +39,7 @@ export const Form = ({ updateUi }) => {
                                                         rows="3"
                                                         type="text"
                                                         name="comment"
-                                                        className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full"
+                                                        className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full pl-4"
                                                         placeholder="Add a comment..."
                                                 ></textarea>
                                         </form>

@@ -28,7 +28,7 @@ export const MainComment = ({ isMine, comment, handleReply, handleEdit, upVote, 
                                                 <div className=" flex-1 flex  md:flex lg:flex text-sm">
                                                         <div>
                                                                 <Image
-                                                                        src="/assets/images/image-amyrobson.png"
+                                                                        src={comment.image}
                                                                         width={30}
                                                                         height={30}
                                                                         alt=""

@@ -52,7 +52,7 @@ export const EditForm = ({ isMine, comment, updateComment, myName }) => {
                                         </div>
                                         <div className="w-[100%]  mt-2">
                                                 <form className=" " >
-                                                        <textarea rows="3" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full " placeholder="Add a comment..." value={newComment} onChange={handleChange} >
+                                                        <textarea rows="3" type="text" name="comment" className="border-[1px] border-inherit outline-none focus:outline-none rounded placeholder:pl-2 placeholder:pt-2 placeholder:text-xs w-full pl-4" placeholder="Add a comment..." value={newComment} onChange={handleChange} >
                                                         </textarea>
                                                 </form>
                                         </div>
